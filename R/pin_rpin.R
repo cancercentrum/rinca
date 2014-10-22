@@ -91,7 +91,9 @@
 #' max(pin_to_date(p_ms3)) <= max(pin_to_date(p_ms))
 #' 
 #' ## We can modify the sex distribution even though we keep the age-distribution 
-#' rpin(p_ms, male_prob = .01) %>% pin_sex %>% table()
+#' x <- rpin(p_ms, male_prob = .01) 
+#' x <- pin_sex(x) 
+#' table(x)
 
 rpin <- function(x, ...){
   UseMethod("rpin")
@@ -157,12 +159,10 @@ rpin.integer <- function(x,
   }
   
   ## Pos 1-8 (Birthday)
-  pos18 <- as.numeric(as.Date(u_birth) - as.Date(l_birth)) %>%
-    max(1) %>% # To avoid problem when l_birth == u_birth
-    sample.int(x, replace = TRUE) %>%
-    `-`(1) %>%
-    as.Date(origin = as.Date(l_birth)) %>%
-    format(format = "%Y%m%d")
+  birth_width <- as.numeric(as.Date(u_birth) - as.Date(l_birth))
+  birth_width <- max(birth_width, 1)
+  rdates      <- sample.int(birth_width, x, replace = TRUE) - 1
+  pos18      <- format(rdates, as.Date(origin = as.Date(l_birth)), format = "%Y%m%d")
   
   ## Add pos 9-12
   pin <- birthdate2pin(pos18, male_prob = male_prob, ...)
@@ -200,19 +200,14 @@ rpin.pin <- function(x,
   
   ## If no birth limits specified, we use all years from x
   if (missing(l_birth)){
-    l_birth  <- pin_to_date(x) %>% 
-      min() %>%
-      format(format = "%Y") %>%
-      paste0("-01-01") 
+    l_birth <- format(min(pin_to_date(x)), format = "%Y")
+    l_birth <- paste0(l_birth, "-01-01")
   }
   l_birth <- as.Date(l_birth)
   if (missing(u_birth)){
-    u_birth  <- pin_to_date(x) %>% 
-      max() %>%
-      format(format = "%Y") %>%
-      paste0("-12-31") %>%
-      as.Date() %>%
-      min(Sys.Date())
+    u_birth <- format(max(pin_to_date(x)), format = "%Y")
+    u_birth <- as.Date(paste0(u_birth, "-12-31"))
+    u_birth <- min(u_birth, Sys.Date())
   }
   u_birth <- as.Date(u_birth)
   
@@ -236,11 +231,9 @@ rpin.pin <- function(x,
   }
   
   ## Empirical distribution for birthdays in x  
-  dpin <- x_lim %>%
-    pin_to_date() %>%
-    as.Date() %>%
-    as.numeric() %>%
-    logspline::logspline(lbound = l_birth, ubound = u_birth) 
+  dpin <- as.numeric(as.Date(pin_to_date(x_lim)))
+  dpin <- logspline::logspline(dpin, lbound = l_birth, ubound = u_birth) 
+
     
   ## Generate a random sample of pins from the empirical distribution
   pin <- rpin.pin_internal(x = length(x_lim), distribution = dpin, male_prob = male_prob)
@@ -291,13 +284,17 @@ pin_anonymise <- function(x){
 rpin.pin_internal <- function(x, distribution, ...){
   
   ## Pos 1 - 8
-  logspline::rlogspline(x, distribution) %>%
-    round(0) %>%
-    as.Date(origin = "1970-01-01") %>%
-    format(format = "%Y%m%d") %>%
+  pos18 <- 
+      format(
+          as.Date(
+              round(
+                  logspline::rlogspline(x, distribution), 
+                  0), 
+              origin = "1970-01-01"),
+          format = "%Y%m%d")
     
     ## Add pos 9 - 12
-    birthdate2pin(...)
+    birthdate2pin(pos18, ...)
 }
 
 
