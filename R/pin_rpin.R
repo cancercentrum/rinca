@@ -55,16 +55,18 @@
 #' 
 #' @export
 #' @name rpin 
-#' @import dplyr
-#' 
+#' @import sweidnumbr
 #' @examples
+#' 
+#' library(sweidnumbr)
+#' set.seed(12345)
 #' ## Generate some fake pins
 #' p <- rpin(100)
 #' 
 #' ## Most pin-functions can be applied to p 
 #' is.pin(p) # TRUE
 #' pin_sex(p) # With mean(pin_sex(p) == "Male") -> male_prob when x -> Inf
-#' pin_birthplace(p) # non-informative
+#' table(pin_birthplace(p)) # non-informative
 #' pin_age(p)
 #' pin_to_date(p)
 #' 
@@ -76,7 +78,7 @@
 #' 
 #' ## Now, assume for a moment that p_ms is actually real data that we want to anonymise.
 #' ## The easy way:
-#' p_ms2 <- pin_anonymise(p_ms) # Equivalent to rpin(p_ms)
+#' p_ms2 <- rpin(p_ms)
 #' ## We then have new (fake) numbers but with the same age- and sex distribuiton.
 #' table(pin_sex(p_ms2))
 #' summary(pin_age(p_ms2))
@@ -162,7 +164,7 @@ rpin.integer <- function(x,
   birth_width <- as.numeric(as.Date(u_birth) - as.Date(l_birth))
   birth_width <- max(birth_width, 1)
   rdates      <- sample.int(birth_width, x, replace = TRUE) - 1
-  pos18      <- format(rdates, as.Date(origin = as.Date(l_birth)), format = "%Y%m%d")
+  pos18      <- format(as.Date(rdates, origin = l_birth), format = "%Y%m%d")
   
   ## Add pos 9-12
   pin <- birthdate2pin(pos18, male_prob = male_prob, ...)
@@ -301,7 +303,7 @@ rpin.pin_internal <- function(x, distribution, ...){
 
 #' Given a birtdate, attach the last four digits to make a non-personal ("fake") pin
 #' 
-#' @param vector with birtdates
+#' @param pos18 vector with birtdates
 #' @param male_prob proportion of males in the outcome
 #' @return pin vector
 birthdate2pin <- function(pos18, male_prob = 0.5){
@@ -316,7 +318,7 @@ birthdate2pin <- function(pos18, male_prob = 0.5){
   
   ## pos 12 - With a bad workaround for luhn_algo that coud hopefully be dropped soon
   pos111 <- paste0(pos18, pos910, pos11)
-  pos12 <- Vectorize(luhn_algo)(paste0(pos111, "0"))
+  pos12 <- suppressMessages(Vectorize(luhn_algo)(paste0(pos111, "0")))
   
   ## Full pin
   pin <- paste0(pos111, pos12)

@@ -6,9 +6,9 @@
 birthdate2pin(pos18, male_prob = 0.5)
 }
 \arguments{
-\item{male_prob}{proportion of males in the outcome}
+\item{pos18}{vector with birtdates}
 
-\item{vector}{with birtdates}
+\item{male_prob}{proportion of males in the outcome}
 }
 \value{
 pin vector

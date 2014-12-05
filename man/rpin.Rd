@@ -81,13 +81,15 @@ relationships between elements in \code{x} are maintaind as described for argume
 \code{keep_rel}.
 }
 \examples{
+library(sweidnumbr)
+set.seed(12345)
 ## Generate some fake pins
 p <- rpin(100)
 
 ## Most pin-functions can be applied to p
 is.pin(p) # TRUE
 pin_sex(p) # With mean(pin_sex(p) == "Male") -> male_prob when x -> Inf
-pin_birthplace(p) # non-informative
+table(pin_birthplace(p)) # non-informative
 pin_age(p)
 pin_to_date(p)
 
@@ -99,7 +101,7 @@ summary(pin_age(p_ms))
 
 ## Now, assume for a moment that p_ms is actually real data that we want to anonymise.
 ## The easy way:
-p_ms2 <- pin_anonymise(p_ms) # Equivalent to rpin(p_ms)
+p_ms2 <- rpin(p_ms)
 ## We then have new (fake) numbers but with the same age- and sex distribuiton.
 table(pin_sex(p_ms2))
 summary(pin_age(p_ms2))
@@ -114,6 +116,8 @@ min(pin_to_date(p_ms3)) >= min(pin_to_date(p_ms))
 max(pin_to_date(p_ms3)) <= max(pin_to_date(p_ms))
 
 ## We can modify the sex distribution even though we keep the age-distribution
-rpin(p_ms, male_prob = .01) \%>\% pin_sex \%>\% table()
+x <- rpin(p_ms, male_prob = .01)
+x <- pin_sex(x)
+table(x)
 }
 
