@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>testCoverage Report rinca</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/black-tie/jquery-ui.css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+	  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script><!--<script>
+        $(function() {
+          $( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+          $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+        });
+    </script>-->
+    <style>
+	.footer {
+		padding-top: 19px;
+		color: #777;
+		border-top: 1px solid #e5e5e5;
+	}
+  .btn,
+  .nav-pills>li>a,
+  .ui-corner-all,
+  .ui-corner-top,
+  .ui-corner-left,
+  .ui-corner-tl {
+    border-radius: 0;
+  }
+  .ui-widget-header {
+    border: 1px solid #aaa;
+  	background: #FAA531;
+  	color: #222222;
+  	font-weight: bold;
+  }
+  .fail {
+    color: #A94442;
+  background-color: #F2DEDE;
+  }
+  .pass {
+    color: #3C763D;
+  background-color: #DFF0D8;
+  }
+    </style>
+</head>
+<body>
+  <script>
+  var tagList = ["1_307","1_367","1_370","1_449","1_453","1_456","1_459","1_478","1_481","1_503","1_506","1_535","1_554","1_557","1_560","1_575","1_589","1_610","1_613","1_732","1_742","1_766","1_769","1_772","1_782","1_800","1_803","1_821","1_824","1_853","1_856","1_859","1_895","1_898","1_933","1_939","1_942","1_1078","1_1115","1_1128","1_1131","1_1134","1_1137","1_1165","1_1168","1_1195","1_1198","1_1213","1_1226","1_1229","1_1232","1_1235","1_1263","1_1266","1_1269","1_1291","1_1294","1_1302","1_1325","1_1328","1_1346","1_1349","1_1352","1_1369","1_1372","1_1380","1_1387","1_1404","1_1421","1_1449","1_1466","1_1538","1_1541","1_1544","1_1606","1_1609","1_1612","1_1615","1_1636","1_1641","1_1675","1_1678","1_1683","1_1724","1_1730","1_1733","1_1784","1_1787","1_1790","1_1793","1_1814","1_1816","1_1839","1_1842","1_1845","1_1963","1_1967","1_1971","1_1975","1_1981","1_2038","1_2105","1_2108","1_2126","1_2129","1_2163","1_2166","1_2169","1_2196","1_2199","1_2205","1_2239","1_2242","1_2265","1_2268","1_2271","1_2281","1_2312","1_2315","1_2338","1_2341","1_2430","1_2439","1_2442","1_2467","1_2470","1_2473","1_2488","1_2499","1_2502","1_2525","1_2533","1_2541","1_2563","1_2566","1_2588","1_2598"];
+var sumTags = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+var allTags = [[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,1],[0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
+var coverage = [[[83,54]],[[10,127]],[[16,121]],[[23,114]],[[0,137]]];
+var all_coverage = [[132,5]];
+var sumAllTraces = {"0":137,"1":132};
+docolor = function(j, bb) {
+// $("#t_" + tagList[j]).css("backgroundColor", bb ? "lightgreen" : "lightpink");
+    if(bb > 0) {
+        $("#t_" + tagList[j]).removeClass("fail").addClass("pass");
+	} else {
+        $("#t_" + tagList[j]).removeClass("pass").addClass("fail");
+    }
+};
+pbsummed = function(j, cov) {
+    pct = 100 * (cov[0] / (cov[0] + cov[1]));
+    $("#progress-" + (j + 1)).progressbar({
+        value: pct
+    });
+};
+$(document).ready(function() {
+    $.each(sumTags, docolor);
+    $.each(all_coverage, pbsummed);
+    $("#trace_all").click(function() {
+        $.each(sumTags, docolor);
+        $.each(all_coverage, pbsummed)
+    });
+    $.each(allTags, function(i, dum) {
+        $("#run_" + (i + 1)).click(
+            function() {
+                $.each(allTags[i], docolor);
+                $.each(coverage[i], function(j, cov) {
+                    pct = 100 * (cov[0] / (cov[0] + cov[1]));
+                    $("#progress-" + (j + 1)).progressbar({
+                        value: pct
+                    });
+                })
+            });
+    });
+
+    //This will only run if jQuery has loaded.
+    $(".internet-connectivity").hide();
+});
+$( document ).ready(function() {
+  $(".internet-connectivity").hide();
+})
+  </script>
+  <div class="alert alert-danger internet-connectivity" role="alert"><h1><strong>Warning:</strong> An internet connection is required to load external assets.</h1></div>
+  <div class="container">
+  <div class="jumbotron">
+    <h1>testCoverage Report <small>rinca</small></h1>
+  </div>
+  <h2>Summary</h2>
+<!-- html table generated in R 3.1.2 by xtable 1.7-4 package -->
+<!-- Fri Dec  5 09:50:53 2014 -->
+<table class="table table-bordered">
+<tr> <th>  </th> <th> Total # Tracepoints </th> <th> # Executed </th> <th> % Coverage </th>  </tr>
+  <tr> <td align="right"> rinca </td> <td> 137 </td> <td> 132 </td> <td>  96% </td> </tr>
+   </table>
+<h2>testthat Tests</h2>
+	<button type="button" class="btn btn-default" id="trace_all">All Tests</button>&nbsp;<button type='button' class='btn btn-default' id='run_1'>test-rpin.default.R</button>&nbsp;<button type='button' class='btn btn-default' id='run_2'>test-rpin.integer.R</button>&nbsp;<button type='button' class='btn btn-default' id='run_3'>test-rpin.numeric.R</button>&nbsp;<button type='button' class='btn btn-default' id='run_4'>test-rpin.pin.R</button>&nbsp;<button type='button' class='btn btn-default' id='run_5'>test-rpin.R</button>&nbsp;<h2>Resource Files</h2><div class="row">
+       <div class="col-md-4">
+        <ul class="nav nav-pills nav-stacked" role="tablist"><li class="active"><a role="tab" data-toggle="tab" href="#tabs-1">pin_rpin.R</a><div id="progress-1" ></div></li>
+</ul>
+    </div> 
+    <div class="col-md-8">
+    <div class="tab-content"><div class="tab-pane active" id="tabs-1"><pre>#' Generate random (or anonymise existing pins to) non-personal ("fake") pins 
+#'
+#' \code{rpin} is a generic function to generate non-personal pins for testing and educational purposes.
+#' \code{pin_anonymise} is a wrapper to anonymise/de-personalise existing pins.
+#' 
+#' A pin, where the birth number (digit 9-11 in a 12 number pin) falls in the interval [880, 999], is 
+#' a valid personal identification number but is never assigned to an actual person.
+#' Numbers of this form can instead be used for testing and educational procedures 
+#' without the risk to intefer with personal (and possibly sensitive) data. 
+#' 
+#' @param x is either an integer (numeric vector of length one) specifing the length of the generated pin vector,
+#' or a pin vector itself to be used for generating similair but anonymised pins (see section "Anonymise").
+#' @param l_birth,u_birth are dates (or objects that can be coerced to such) constituting a possible time intervall,
+#' limiting the period from which birth dates are drawn. 
+#' If \code{x} is an integer, these are \code{"1900-01-01"} and \code{Sys.Date()} by default.
+#' If \code{x} is a pin vector, these are matched to the birth years in pin.
+#' @param unique Should all generated pins be unique, i e should the sampling be done without replacement (\code{TRUE} as default).
+#' A possible relation between pins in \code{x} (if x is of class pin) will however be kept if \code{keep_rel = TRUE}.
+#' @param male_prob probability that a generated pin refers to a man (\code{female_prob = 1 - male_prob}).
+#' If \code{x} is an integer, \code{male_prob} is \code{0.5} by default.
+#' If \code{x} is a pin vector, \code{male_prob} is estimated as the observed probability from \code{x}.
+#' @param keep_rel Should a possible relationship between pins in \code{x} be kept in the output, i e
+#' if the same pin is repeated in \code{x}, should pins at the same positions in the output also be repeated?
+#' This is \code{TRUE} by default and works independently of \code{unique}.
+#' @param ... additional arguments to be passed to or from methods.
+#' 
+#' @return
+#' \code{rpin} returns a vector of class \code{pin} with length \code{x} if \code{x} is an integer or with length \code{length(x)} 
+#' if \code{x} is itself a pin object. The object will also have an extra attribute \code{"non_personal"} set to \code{TRUE} to indicate
+#' that the generated pins are non-personal ("fake").
+#'
+#' @section Simulation:
+#' The simulation is done by the following steps:
+#' \itemize{
+#' \item A birthdate is simulated as described in section \code{Anonymise} or, if \code{x} is an integer,
+#' by a uniform distribution from \code{[l_birth, u_birth]}.
+#' \item The two first digits of the birth number is given by a discrete random sample from [88, 99]. 
+#' Note that these numbers do not speify birthplace in this case (even if year of birth &lt; 1990).
+#' \item The last digit of the birth number is sampled from [0, 9] with probabilies according to \code{male_prob} 
+#' (that is either specified explicity or as described in section \code{Anonymise}).
+#' \item The control number is calculated from digit 1-11 by the Luhn Algorithm 
+#' (\code{\link{luhn_algo}}).
+#' }
+#' 
+#' @section Anonymise:
+#' Given that \code{x} is an object of class \code{pin}, the output of \code{rpin} 
+#' is a pin vector that tries to mimic \code{x} in all aspects 
+#' except identifying real persons. 
+#' The empirical age (birthday) distribution from \code{x} will be estimated by \code{\link{logspline}}.
+#' A random sample of \code{length(x)} is drawn from that distribution. The last four digits are generated
+#' as in section \code{Simulation} but with sex distribution estimated from \code{x}. The internal 
+#' relationships between elements in \code{x} are maintaind as described for argument
+#' \code{keep_rel}.
+#' 
+#' @export
+#' @name rpin 
+#' @import sweidnumbr
+#' @examples
+#' 
+#' library(sweidnumbr)
+#' set.seed(12345)
+#' ## Generate some fake pins
+#' p &lt;- rpin(100)
+#' 
+#' ## Most pin-functions can be applied to p 
+#' is.pin(p) # TRUE
+#' pin_sex(p) # With mean(pin_sex(p) == "Male") -&gt; male_prob when x -&gt; Inf
+#' table(pin_birthplace(p)) # non-informative
+#' pin_age(p)
+#' pin_to_date(p)
+#' 
+#' ## If we want to simulate university students in a med course in Sweden,
+#' ## we migh try
+#' p_ms &lt;- rpin(100, l_birth = "1974-01-01", u_birth = "1994-01-01", male_prob = .25)
+#' table(pin_sex(p_ms))
+#' summary(pin_age(p_ms))
+#' 
+#' ## Now, assume for a moment that p_ms is actually real data that we want to anonymise.
+#' ## The easy way:
+#' p_ms2 &lt;- rpin(p_ms)
+#' ## We then have new (fake) numbers but with the same age- and sex distribuiton.
+#' table(pin_sex(p_ms2))
+#' summary(pin_age(p_ms2))
+#' 
+#' ## The empirical age distribution from p_ms itself could of course also generate 
+#' ## birth dates outside of the empirical birthdate interval from p_ms. The default limit 
+#' ## is to not generate pins with birth year before the birth year of the oldest pin in the input
+#' ## (and wice versa for the upper limit). But we could also chose to not tolerate any
+#' ## pins "older" than the "oldest" pin from the input
+#' p_ms3 &lt;- rpin(p_ms, l_birth = min(y &lt;- pin_to_date(p_ms)), u_birth = max(y))
+#' min(pin_to_date(p_ms3)) &gt;= min(pin_to_date(p_ms))
+#' max(pin_to_date(p_ms3)) &lt;= max(pin_to_date(p_ms))
+#' 
+#' ## We can modify the sex distribution even though we keep the age-distribution 
+#' x &lt;- rpin(p_ms, male_prob = .01) 
+#' x &lt;- pin_sex(x) 
+#' table(x)
+
+<span id="t_1_294">rpin</span> &lt;- function(x, ...){
+  <span id="t_1_307">UseMethod("rpin")</span>
+}
+
+
+
+################################################################################
+#                                                                              #
+#                              Default rpin-method                             #
+#                                                                              #
+################################################################################
+
+#' @export 
+<span id="t_1_354">rpin.default</span> &lt;- function(x, ...){
+  <span id="t_1_367">rpin(<span id="t_1_370">as.pin(x)</span>, ...)</span>
+}
+
+
+
+
+################################################################################
+#                                                                              #
+#                              numeric rpin-method                             #
+#                                                                              #
+################################################################################
+
+## This method is just a wrapper if x is neither integer, nor pin.
+## It is not documented since it should not be used purposely.
+#' @export
+<span id="t_1_434">rpin.numeric</span> &lt;- function(x, ...){
+  if (<span id="t_1_449">suppressWarnings(!<span id="t_1_453">any(<span id="t_1_456">is.na(<span id="t_1_459">as.pin(x)</span>)</span>)</span> && <span id="t_1_478">is.pin(<span id="t_1_481">as.pin(x)</span>)</span>)</span>){
+    <span id="t_1_503">rpin(<span id="t_1_506">as.pin(x)</span>, ...)</span>
+  }
+  else if (<span id="t_1_535">length(x)</span> == 1){
+    if ( <span id="t_1_554">abs(<span id="t_1_557">x</span> - <span id="t_1_560">round(x)</span>)</span> &gt;= <span id="t_1_575">.Machine</span>$double.eps^0.5){
+      <span id="t_1_589">warning("x rounded to nearest lower integer!")</span>
+    }
+    <span id="t_1_610">rpin(<span id="t_1_613">as.integer(x)</span>, ...)</span>
+  }
+}
+
+
+
+
+################################################################################
+#                                                                              #
+#                              integer rpin-method                             #
+#                                                                              #
+################################################################################
+
+#' @export
+#' @rdname rpin
+<span id="t_1_683">rpin.integer</span> &lt;- function(x,
+                         l_birth = "1900-01-01",
+                         u_birth   = Sys.Date(),
+                         unique = TRUE,
+                         male_prob = 0.5,
+                         ...){
+  
+  if (<span id="t_1_732">l_birth</span> &gt; u_birth){ 
+    <span id="t_1_742">stop("l_birth should not be a date later than u_birth!")</span>
+  }
+  
+  ## Pos 1-8 (Birthday)
+  <span id="t_1_766">birth_width</span> &lt;- <span id="t_1_769">as.numeric(<span id="t_1_772">as.Date(u_birth)</span> - <span id="t_1_782">as.Date(l_birth)</span>)</span>
+  <span id="t_1_800">birth_width</span> &lt;- <span id="t_1_803">max(birth_width, 1)</span>
+  <span id="t_1_821">rdates</span>      &lt;- <span id="t_1_824">sample.int(birth_width, x, replace = TRUE)</span> - 1
+  <span id="t_1_853">pos18</span>      &lt;- <span id="t_1_856">format(<span id="t_1_859">as.Date(rdates, origin = l_birth)</span>, format = "%Y%m%d")</span>
+  
+  ## Add pos 9-12
+  <span id="t_1_895">pin</span> &lt;- <span id="t_1_898">birthdate2pin(pos18, male_prob = male_prob, ...)</span>
+  
+  ## Only unique pins if unique = TRUE. 
+  ## Otherwise resample duplicated subset with rpin.pin_internal
+  if (<span id="t_1_933">unique</span>){
+    <span id="t_1_939">pin</span> &lt;- <span id="t_1_942">rpin_unique(pin, recursive_fun = rpin.integer,
+                       l_birth = l_birth, u_birth = u_birth,
+                       unique = TRUE, male_prob = male_prob)</span>
+  } 
+  
+  pin
+  
+}
+
+
+
+
+################################################################################
+#                                                                              #
+#                                pin rpin-method                               #
+#                                                                              #
+################################################################################
+
+#' @export
+#' @rdname rpin
+<span id="t_1_1049">rpin.pin</span> &lt;- function(x,
+                     l_birth,
+                     u_birth,
+                     unique = TRUE,
+                     male_prob = mean(<span id="t_1_1078">pin_sex(x)</span> == "Male"),
+                     keep_rel = TRUE,
+                     ...){
+  
+  ## If no birth limits specified, we use all years from x
+  if (<span id="t_1_1115">missing(l_birth)</span>){
+    <span id="t_1_1128">l_birth</span> &lt;- <span id="t_1_1131">format(<span id="t_1_1134">min(<span id="t_1_1137">pin_to_date(x)</span>)</span>, format = "%Y")</span>
+    <span id="t_1_1165">l_birth</span> &lt;- <span id="t_1_1168">paste0(l_birth, "-01-01")</span>
+  }
+  <span id="t_1_1195">l_birth</span> &lt;- <span id="t_1_1198">as.Date(l_birth)</span>
+  if (<span id="t_1_1213">missing(u_birth)</span>){
+    <span id="t_1_1226">u_birth</span> &lt;- <span id="t_1_1229">format(<span id="t_1_1232">max(<span id="t_1_1235">pin_to_date(x)</span>)</span>, format = "%Y")</span>
+    <span id="t_1_1263">u_birth</span> &lt;- <span id="t_1_1266">as.Date(<span id="t_1_1269">paste0(u_birth, "-12-31")</span>)</span>
+    <span id="t_1_1291">u_birth</span> &lt;- <span id="t_1_1294">min(u_birth, <span id="t_1_1302">Sys.Date()</span>)</span>
+  }
+  <span id="t_1_1325">u_birth</span> &lt;- <span id="t_1_1328">as.Date(u_birth)</span>
+  
+  ## We only use data from the specified birth interval
+  <span id="t_1_1346">x_birth</span> &lt;- <span id="t_1_1349">as.Date(<span id="t_1_1352">pin_to_date(x)</span>)</span>
+  <span id="t_1_1369">x_lim</span> &lt;- <span id="t_1_1372">subset(x, <span id="t_1_1380">x_birth</span> &gt;= l_birth & <span id="t_1_1387">x_birth</span> &lt;= u_birth)</span>
+  if (<span id="t_1_1404">length(x_lim)</span> &lt; 1){
+    <span id="t_1_1421">stop("There are no pins from 'x' with birth dates within the specified interval!")</span>
+  }
+  
+  ## We have found by testing that logspline requires at least 10 pins to work
+  ## If we have fewer, we use uniform sampling
+  if (<span id="t_1_1449">length(x_lim)</span> &lt; 10){
+    <span id="t_1_1466">warning("Too few birth dates within [", l_birth, ", ", u_birth, "]",
+            " for a valid empirical distribution estimate. ",
+            "Birth dates are instead simulated uniformly from [", l_birth, ", ", u_birth, "].",
+            call. = FALSE)</span>
+    <span id="t_1_1538">return(<span id="t_1_1541">rpin(<span id="t_1_1544">length(x)</span>, l_birth = l_birth, u_birth = u_birth, 
+         unique = unique, male_prob = male_prob)</span>
+    )</span>
+  }
+  
+  ## Empirical distribution for birthdays in x  
+  <span id="t_1_1606">dpin</span> &lt;- <span id="t_1_1609">as.numeric(<span id="t_1_1612">as.Date(<span id="t_1_1615">pin_to_date(x_lim)</span>)</span>)</span>
+  <span id="t_1_1636">dpin</span> &lt;- logspline<span id="t_1_1641">::</span>logspline(dpin, lbound = l_birth, ubound = u_birth) 
+
+    
+  ## Generate a random sample of pins from the empirical distribution
+  <span id="t_1_1675">pin</span> &lt;- <span id="t_1_1678">rpin.pin_internal(x = <span id="t_1_1683">length(x_lim)</span>, distribution = dpin, male_prob = male_prob)</span>
+    
+  ## Only unique pins if unique = TRUE. 
+  ## Otherwise recursive resampling with subset of duplicates, using rpin.pin_internal
+  if (<span id="t_1_1724">unique</span>){
+    <span id="t_1_1730">pin</span> &lt;- <span id="t_1_1733">rpin_unique(pin, recursive_fun = rpin.pin_internal, 
+                       distribution = dpin, male_prob = male_prob)</span>
+  } 
+  
+  ## But ... non unique values could be allowed if non unique pins exists in x
+  ## Their relationship should be maintained if keep_rel = TRUE
+  if (<span id="t_1_1784">keep_rel</span> && <span id="t_1_1787">any(<span id="t_1_1790">x_dups</span> &lt;- <span id="t_1_1793">duplicated(x)</span>)</span>){
+    for (<span id="t_1_1814">i</span> in <span id="t_1_1816">which(x_dups)</span>){
+      pin[i] &lt;- <span id="t_1_1839">pin</span>[<span id="t_1_1842">x</span> == <span id="t_1_1845">x</span>[i]][1]
+    }
+  }
+  
+  pin
+  
+}
+
+
+
+################################################################################
+#                                                                              #
+#                            help functions to rpin                            #
+#                                                                              #
+################################################################################
+
+
+#' Generate random  pins from birth distribution (given by logspline)
+#' @param x length of the generated pin vector
+#' @param distribution a logspline object with distribution to sample from
+#' @param ... arguments passed to birth2date
+#' @return pin vector of length x
+<span id="t_1_1944">rpin.pin_internal</span> &lt;- function(x, distribution, ...){
+  
+  ## Pos 1 - 8
+  <span id="t_1_1963">pos18</span> &lt;- 
+      <span id="t_1_1967">format(
+          <span id="t_1_1971">as.Date(
+              <span id="t_1_1975">round(
+                  logspline<span id="t_1_1981">::</span>rlogspline(x, distribution), 
+                  0)</span>, 
+              origin = "1970-01-01")</span>,
+          format = "%Y%m%d")</span>
+    
+    ## Add pos 9 - 12
+    <span id="t_1_2038">birthdate2pin(pos18, ...)</span>
+}
+
+
+
+#' Given a birtdate, attach the last four digits to make a non-personal ("fake") pin
+#' 
+#' @param pos18 vector with birtdates
+#' @param male_prob proportion of males in the outcome
+#' @return pin vector
+#' @keywords internal
+<span id="t_1_2088">birthdate2pin</span> &lt;- function(pos18, male_prob = 0.5){
+  
+  <span id="t_1_2105">n</span> &lt;- <span id="t_1_2108">length(pos18)</span>
+  
+  ## Pos 9-10
+  <span id="t_1_2126">pos910</span> &lt;- <span id="t_1_2129">sample(98:99, n, replace = TRUE)</span>
+  
+  ## Pos 11
+  <span id="t_1_2163">pos11</span> &lt;- <span id="t_1_2166">sample(<span id="t_1_2169">x</span> &lt;- 0:9, n, replace = TRUE, prob = <span id="t_1_2196">rep(<span id="t_1_2199">c(1 - <span id="t_1_2205">male_prob</span>, male_prob)</span>, 5)</span>)</span>
+  
+  ## pos 12 - With a bad workaround for luhn_algo that coud hopefully be dropped soon
+  <span id="t_1_2239">pos111</span> &lt;- <span id="t_1_2242">paste0(pos18, pos910, pos11)</span>
+  <span id="t_1_2265">pos12</span> &lt;- <span id="t_1_2268">suppressMessages(<span id="t_1_2271">Vectorize(luhn_algo)</span>(<span id="t_1_2281">paste0(pos111, "0")</span>))</span>
+  
+  ## Full pin
+  <span id="t_1_2312">pin</span> &lt;- <span id="t_1_2315">paste0(pos111, pos12)</span>
+  
+  ## "Formals"
+  <span id="t_1_2338">pin</span> &lt;- <span id="t_1_2341">as.pin(pin)</span>
+  attr(pin, "non_personal") &lt;- TRUE 
+  
+  pin
+}
+
+
+#' Resample duplicated subset of pin vector to make all elements unique
+#' 
+#' @param pin a pin vector with possibly non unique elements
+#' @param recursive_fun function to regenerate duplicated pins
+#' @param ... arguments pased to \code{recursive_fun}
+#' @keywords internal
+<span id="t_1_2413">rpin_unique</span> &lt;- function (pin, recursive_fun, ...) {
+  
+  <span id="t_1_2430">i</span>  &lt;- 0
+  <span id="t_1_2439">max_recursion</span> &lt;- <span id="t_1_2442">getOption("expressions")</span> / 10 # We divide by 10 since it will otherwise be too slow!
+  
+  ## Ue recursion until all values are unique
+  while (<span id="t_1_2467">any(<span id="t_1_2470">dups</span> &lt;- <span id="t_1_2473">duplicated(pin)</span>)</span> && <span id="t_1_2488">i</span> &lt;= max_recursion){
+    <span id="t_1_2499">x</span> &lt;- <span id="t_1_2502">sum(dups)</span>
+    pin[dups] &lt;- <span id="t_1_2525">do.call(recursive_fun, <span id="t_1_2533">c(x, <span id="t_1_2541">list(...)</span>)</span>)</span> # r_pos112(sum(dups))
+    <span id="t_1_2563">i</span>  &lt;- <span id="t_1_2566">i</span> + 1
+  }
+  
+  if (<span id="t_1_2588">i</span> &gt; max_recursion){
+    <span id="t_1_2598">stop("x is too big and the birth interval too short to make all pins unique!")</span>
+  }
+  pin
+}
+</pre></div>
+    </div>
+    </div>
+  </div>
+  <div class="footer">
+    <p> Generated on2014-12-05 09:50:53 by <a href="http://www.mango-solutions.com/wp/products-services/r-services/r-packages/testcoverage/">testCoverage</a>.</p>
+  </div>
+  </div>
+</body> 
+</html>
