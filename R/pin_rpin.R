@@ -10,7 +10,6 @@
 #' 
 #' @param x is either an integer (numeric vector of length one) specifing the length of the generated pin vector,
 #' or a pin vector itself to be used for generating similair but anonymised pins (see section "Anonymise").
-#' \code{x} should be of class pin in \code{pin_anonymise}.
 #' @param l_birth,u_birth are dates (or objects that can be coerced to such) constituting a possible time intervall,
 #' limiting the period from which birth dates are drawn. 
 #' If \code{x} is an integer, these are \code{"1900-01-01"} and \code{Sys.Date()} by default.
@@ -45,7 +44,7 @@
 #' 
 #' @section Anonymise:
 #' Given that \code{x} is an object of class \code{pin}, the output of \code{rpin} 
-#' (or \code{pin_anonymise}) is a pin vector that tries to mimic \code{x} in all aspects 
+#' is a pin vector that tries to mimic \code{x} in all aspects 
 #' except identifying real persons. 
 #' The empirical age (birthday) distribution from \code{x} will be estimated by \code{\link{logspline}}.
 #' A random sample of \code{length(x)} is drawn from that distribution. The last four digits are generated
@@ -259,16 +258,6 @@ rpin.pin <- function(x,
   
 }
 
-## Alias without tuning parameters to anonymise existing pin
-#' @export
-#' @rdname rpin
-pin_anonymise <- function(x){
-  if (!is.pin(x)){
-    x <- x
-  }
-  rpin.pin(x)
-} 
-
 
 
 ################################################################################
@@ -306,6 +295,7 @@ rpin.pin_internal <- function(x, distribution, ...){
 #' @param pos18 vector with birtdates
 #' @param male_prob proportion of males in the outcome
 #' @return pin vector
+#' @keywords internal
 birthdate2pin <- function(pos18, male_prob = 0.5){
   
   n <- length(pos18)
@@ -336,6 +326,7 @@ birthdate2pin <- function(pos18, male_prob = 0.5){
 #' @param pin a pin vector with possibly non unique elements
 #' @param recursive_fun function to regenerate duplicated pins
 #' @param ... arguments pased to \code{recursive_fun}
+#' @keywords internal
 rpin_unique <- function (pin, recursive_fun, ...) {
   
   i  <- 0

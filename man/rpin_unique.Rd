@@ -15,4 +15,5 @@ rpin_unique(pin, recursive_fun, ...)
 \description{
 Resample duplicated subset of pin vector to make all elements unique
 }
+\keyword{internal}
 

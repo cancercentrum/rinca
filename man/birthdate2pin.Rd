@@ -16,4 +16,5 @@ pin vector
 \description{
 Given a birtdate, attach the last four digits to make a non-personal ("fake") pin
 }
+\keyword{internal}
 
