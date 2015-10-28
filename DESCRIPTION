@@ -5,10 +5,11 @@ Version: 1.0
 Date: 2014-10-21
 Author: Erik Bulow
 Maintainer: Erik Bulow <erik.bulow@rccvast.se>
-Description: More about what it does (maybe more than one line)
+Description: More about what it does (maybe more than one line).
 License: GPL-2
 Imports:
     logspline,
     sweidnumbr
 Suggests:
-    testthat
+    testthat,
+    rccmisc
