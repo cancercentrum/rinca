@@ -1,11 +1,11 @@
 Package: rinca
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
-Date: 2014-10-21
+Title: Anonymise INCA Data
+Version: 0.0.1
+Date: 2015-10-28
 Author: Erik Bulow
 Maintainer: Erik Bulow <erik.bulow@rccvast.se>
-Description: More about what it does (maybe more than one line).
+Description: Generate INCA data for tests, demonstrations and validation purposes. The package contains methods to anonymise common inca variables. It should also be possible to automaticlly anonymise a whole data set.
 License: GPL-2
 Imports:
     logspline,
