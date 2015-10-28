@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/cancercentrum/rinca.png?branch=master)](https://travis-ci.org/cancercentrum/rinca)
+[![Travis-CI Build Status](https://travis-ci.org/cancercentrum/rinca.svg?branch=master)](https://travis-ci.org/cancercentrum/rinca)
+[![Coverage Status](https://img.shields.io/codecov/c/github/cancercentrum/rinca/master.svg)](https://codecov.io/github/cancercentrum/rinca?branch=master)
 
-(Note on travis buid test: the test relies on the CRAN version of `sweidnumbr` while the actual package relies on the GitHub-version. The tests might fail as long as the CRAN version is not updated to the latest GitHub-version.)
 
 rinca
 =========
